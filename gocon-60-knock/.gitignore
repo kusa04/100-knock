@@ -1,0 +1,18 @@
+# バイナリ・生成物
+/bin/
+/tmp/
+/uploads/
+*.test
+*.out
+*.prof
+coverage.html
+
+# ローカル設定
+.env
+.env.local
+
+# エディタ
+.idea/
+.vscode/
+*.swp
+.DS_Store

@@ -1,0 +1,58 @@
+# 問題 74 で本格導入します。それまでは make lint が staticcheck にフォールバックします。
+version: "2"
+
+run:
+  timeout: 5m
+
+linters:
+  default: none
+  enable:
+    - errcheck
+    - govet
+    - staticcheck
+    - ineffassign
+    - unused
+    - bodyclose
+    - rowserrcheck
+    - sqlclosecheck
+    - noctx
+    - errorlint
+    - gosec
+    - depguard
+  settings:
+    depguard:
+      rules:
+        domain:
+          files:
+            - "**/domain/**"
+          deny:
+            - pkg: github.com/kusa04/go-backend-100-knocks/usecase
+              desc: domain は usecase に依存しない
+            - pkg: github.com/kusa04/go-backend-100-knocks/adapter
+              desc: domain は adapter に依存しない
+            - pkg: github.com/kusa04/go-backend-100-knocks/gateway
+              desc: domain は gateway に依存しない
+            - pkg: database/sql
+              desc: domain は DB を知らない
+            - pkg: net/http
+              desc: domain は HTTP を知らない
+        usecase:
+          files:
+            - "**/usecase/**"
+          deny:
+            - pkg: github.com/kusa04/go-backend-100-knocks/adapter
+              desc: usecase は adapter に依存しない(port 経由にする)
+            - pkg: github.com/kusa04/go-backend-100-knocks/gateway
+              desc: usecase は gateway に依存しない
+    gosec:
+      excludes:
+        - G104 # errcheck と重複
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+
+issues:
+  exclude-dirs:
+    - gen
