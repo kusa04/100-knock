@@ -1,20 +1,27 @@
 package task
 
+// Statusはtaskの状態（status）を管理しています
 type Status string
 
 const (
-	StatusTodo     = "todo"
-	StatusDoing    = "doing"
-	StatusDone     = "done"
-	StatusCanceled = "canceled"
+	StatusTodo     Status = "todo"
+	StatusDoing    Status = "doing"
+	StatusDone     Status = "done"
+	StatusCanceled Status = "canceled"
 )
 
-func (s *Status) Status() string {
-	// todo
-	return ""
+func (s Status) String() string {
+	return string(s)
 }
 
-func (s *Status) IsValid() bool {
-	// todo'
-	return false
+func (s Status) IsValid() bool {
+	switch s {
+	case StatusTodo, StatusDoing, StatusDone, StatusCanceled:
+		return true
+	default:
+		return false
+	}
 }
+
+// todo
+// go doc ./domain/task でパッケージコメントと Task の doc コメントが表示される
