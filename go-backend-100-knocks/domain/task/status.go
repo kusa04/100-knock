@@ -22,6 +22,3 @@ func (s Status) IsValid() bool {
 		return false
 	}
 }
-
-// todo
-// go doc ./domain/task でパッケージコメントと Task の doc コメントが表示される
