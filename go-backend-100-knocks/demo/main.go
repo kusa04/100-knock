@@ -20,8 +20,13 @@ func TimeCheck() {
 
 	inTime := time.In(time.Location())
 	fmt.Println(inTime) // 2026-09-30 21:43:06.741396 +0900 JST
+
 }
 
 func main() {
 	TimeCheck()
+
+	// timeの初期値を確認
+	var initTime time.Time
+	fmt.Println(initTime)
 }
